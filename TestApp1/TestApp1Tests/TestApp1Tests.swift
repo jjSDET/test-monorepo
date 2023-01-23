@@ -1,8 +1,7 @@
 //
-//  TestApp1Tests.swift
 //  TestApp1Tests
 //
-//  Created by isabel rios on 19/1/23.
+//  Created by isabel rios
 //
 
 import XCTest
