@@ -23,6 +23,9 @@ workflows:
         - test_repetition_mode: retry_on_failure
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
+    trigger_map:
+    - push_branch: main
+    workflow: "App2"
   App2:
     description: |
       The workflow executes the tests. The *retry_on_failure* test repetition mode is enabled.
@@ -43,10 +46,9 @@ workflows:
         - test_repetition_mode: retry_on_failure
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
-trigger_map:
-- push_branch: main
-workflow: "App*"
-
+    trigger_map:
+    - push_branch: main
+    workflow: "App2"
 meta:
   bitrise.io:
     stack: osx-xcode-14.1.x
