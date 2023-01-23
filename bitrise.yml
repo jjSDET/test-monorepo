@@ -46,14 +46,3 @@ workflows:
 meta:
   bitrise.io:
     stack: osx-xcode-14.1.x
-app:
-  envs:
-  - opts:
-      is_expand: false
-    #BITRISE_PROJECT_PATH: TestApp2/TestApp2.xcodeproj
-  - opts:
-      is_expand: false
-    #BITRISE_SCHEME: TestApp2
-  - opts:
-      is_expand: false
-    #BITRISE_DISTRIBUTION_METHOD: development
