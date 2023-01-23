@@ -23,7 +23,6 @@ workflows:
         - test_repetition_mode: retry_on_failure
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
-
 trigger_map:
 - push_branch: main
   workflow: "App1"
