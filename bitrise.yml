@@ -45,7 +45,7 @@ workflows:
     - deploy-to-bitrise-io@2: {}
 trigger_map:
 - push_branch: main
-workflow: App*
+workflow: "App*"
 
 meta:
   bitrise.io:
