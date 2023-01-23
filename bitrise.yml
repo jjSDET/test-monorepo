@@ -23,6 +23,26 @@ workflows:
         - test_repetition_mode: retry_on_failure
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
+  App2:
+    description: |
+      The workflow  the tests. The *retry_on_failure* test repetition mode is enabled.
+
+      Next steps:
+      - Check out [Getting started with iOS apps](https://devcenter.bitrise.io/en/getting-started/getting-started-with-ios-apps.html).
+    steps:
+    - activate-ssh-key@4: {}
+    - git-clone@7: {}
+    - cache-pull@2: {}
+    - recreate-user-schemes@1:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+    - xcode-test@4:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - scheme: "$BITRISE_SCHEME"
+        - test_repetition_mode: retry_on_failure
+    - cache-push@2: {}
+    - deploy-to-bitrise-io@2: {}
 trigger_map:
 - push_branch: main
   workflow: "Common"
