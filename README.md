@@ -1,2 +1,2 @@
 # test-monorepo
-How to launch one app's or the other workflow
+How to launch one app or the other workflow
