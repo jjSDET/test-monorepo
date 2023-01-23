@@ -5,7 +5,7 @@ project_type: ios
 workflows:
   App2:
     description: |
-      The workflow executes the tests. The *retry_on_failure* test repetition mode is enabled.
+      The workflow  the tests. The *retry_on_failure* test repetition mode is enabled.
 
       Next steps:
       - Check out [Getting started with iOS apps](https://devcenter.bitrise.io/en/getting-started/getting-started-with-ios-apps.html).
