@@ -3,32 +3,9 @@ format_version: '11'
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: ios
 workflows:
-  Common:
-    description: |
-      The workflow executes the tests. The *retry_on_failure* test repetition mode is enabled.
-
-      Next steps:
-      - Check out [Getting started with iOS apps](https://devcenter.bitrise.io/en/getting-started/getting-started-with-ios-apps.html).
-    steps:
-    - activate-ssh-key@4: {}
-    - git-clone@7: {}
-    - cache-pull@2: {}
-    - recreate-user-schemes@1:
-        inputs:
-        - project_path: "$BITRISE_PROJECT_PATH"
-    - xcode-test@4:
-        inputs:
-        - project_path: "$BITRISE_PROJECT_PATH"
-        - scheme: "$BITRISE_SCHEME"
-        - test_repetition_mode: retry_on_failure
-    - cache-push@2: {}
-    - deploy-to-bitrise-io@2: {}
   App2:
     description: |
       The workflow  the tests. The *retry_on_failure* test repetition mode is enabled.
-
-      Next steps:
-      - Check out [Getting started with iOS apps](https://devcenter.bitrise.io/en/getting-started/getting-started-with-ios-apps.html).
     steps:
     - activate-ssh-key@4: {}
     - git-clone@7: {}
@@ -43,9 +20,51 @@ workflows:
         - test_repetition_mode: retry_on_failure
     - cache-push@2: {}
     - deploy-to-bitrise-io@2: {}
+  App1:
+    description: |
+      The workflow  the tests.
+    steps:
+    - activate-ssh-key@4: {}
+    - git-clone@7: {}
+    - cache-pull@2: {}
+    - recreate-user-schemes@1:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+    - xcode-test@4:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - scheme: "$BITRISE_SCHEME"
+        - test_repetition_mode: retry_on_failure
+    - cache-push@2: {}
+    - deploy-to-bitrise-io@2: {}
+  General:
+    description: |
+      The workflow to run when code not related to app has changed in PR and / or main
+    steps:
+    - activate-ssh-key@4: {}
+    - git-clone@7: {}
+    - script@1.1:
+        title: Compress Derived Data
+        is_always_run: true
+        inputs:
+        - content: |
+            echo "Just checking this is running General workflow"
+    - cache-pull@2: {}
+    - cache-push@2: {}
+    - deploy-to-bitrise-io@2: {}
 trigger_map:
-- push_branch: main
-  workflow: "Common"
+- push_branch: app2-*
+  workflow: App2
+- push_branch: app1-*
+  workflow: App1
+- push_branch: general-*
+  workflow: General
+- pull_request_source_branch: app1-*
+  workflow: App1
+- pull_request_source_branch: app2-*
+  workflow: App2
+- pull_request_source_branch: general-*
+  workflow: General
 meta:
   bitrise.io:
     stack: osx-xcode-14.1.x
