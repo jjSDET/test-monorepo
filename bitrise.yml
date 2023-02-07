@@ -25,8 +25,10 @@ workflows:
             echo "Hello World!"
             echo "Destination Branch: $BITRISEIO_GIT_BRANCH_DEST"
             echo "Branch being merged: $BITRISE_GIT_BRANCH"
+            echo "The PR merge branch: $BITRISEIO_PULL_REQUEST_MERGE_BRANCH"
+            echo "The PR head branch: $BITRISEIO_PULL_REQUEST_HEAD_BRANCH"
             echo "The git diff: "
-            git diff $BITRISEIO_GIT_BRANCH_DEST..$BITRISE_GIT_BRANCH
+            git diff $BITRISEIO_PULL_REQUEST_MERGE_BRANCH..$BITRISE_GIT_BRANCH
         is_always_run: true
     - deploy-to-bitrise-io@2: {}
 trigger_map:
