@@ -27,6 +27,7 @@ workflows:
             echo "Branch being merged: $BITRISE_GIT_BRANCH"
             echo "The PR merge branch: $BITRISEIO_PULL_REQUEST_MERGE_BRANCH"
             echo "The PR head branch: $BITRISEIO_PULL_REQUEST_HEAD_BRANCH"
+            echo "The git commit of this merge: $BITRISE_GIT_COMMIT"
             echo "The git diff: "
             git diff $BITRISEIO_PULL_REQUEST_MERGE_BRANCH..$BITRISE_GIT_BRANCH
         is_always_run: true
