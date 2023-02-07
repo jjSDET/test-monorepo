@@ -6,8 +6,10 @@ workflows:
     description: |
       The workflow to run when code not related to app has changed in PR and / or main
     steps:
-    - activate-ssh-key@4: {}
-    - git-clone@7: {}
+    - activate-ssh-key@4:
+        is_always_run: true
+    - git-clone@7:
+        is_always_run: true
     - script@1:
         inputs:
         - content: |-
@@ -25,6 +27,7 @@ workflows:
             echo "Branch being merged: $BITRISE_GIT_BRANCH"
             echo "The git diff: "
             git diff $BITRISEIO_GIT_BRANCH_DEST..$BITRISE_GIT_BRANCH
+        is_always_run: true
     - deploy-to-bitrise-io@2: {}
 trigger_map:
 - push_branch: main
