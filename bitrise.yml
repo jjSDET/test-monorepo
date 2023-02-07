@@ -28,8 +28,9 @@ workflows:
             echo "The PR merge branch: $BITRISEIO_PULL_REQUEST_MERGE_BRANCH"
             echo "The PR head branch: $BITRISEIO_PULL_REQUEST_HEAD_BRANCH"
             echo "The git commit of this merge: $BITRISE_GIT_COMMIT"
-            echo "The git diff: "
-            git diff $BITRISEIO_PULL_REQUEST_MERGE_BRANCH..$BITRISE_GIT_BRANCH
+            echo "The git log: "
+            git log
+            git show $BITRISE_GIT_COMMIT
         is_always_run: true
     - deploy-to-bitrise-io@2: {}
 trigger_map:
